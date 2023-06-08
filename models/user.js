@@ -22,8 +22,8 @@ const UserDeatil=new mongoose.Schema({
         required:true
     }
 },{
-    timeStamps:true
+    timestamps:true
 })
 
-const Users=mongoose.model('User_Deatil',UserDeatil);
+const Users=mongoose.model('user',UserDeatil);
 module.exports=Users;

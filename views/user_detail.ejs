@@ -10,6 +10,32 @@
     <p>Name : <%=user.name%></p>
     <p>Age : <%=user.age%></p>
     <p>Birth : <%=user.birthdate%></p>
+<br><br>
+    <h1>Posts</h1>
+    <section id="posts">
+        <%for(let i of user_post){%>
+            <%=i.content%>
+            <br>
+            <small>Posted by: <%=i.user_id.name%></small>
+            
+            <br>
+            <small><%=i.time%></small>
+            <small><a href="/post/delete/?id=<%=i.id%>&user_id=<%=i.user_id.id%>">Delete post</a></small>
+            <form action="/comment/create" method="post">
+                <input type="text" name="content" placeholder="Comment" required>
+                <input type="hidden" name="post_id" value="<%=i._id%>">
+                <button type="submit">Comment</button>
+            </form>
+            <a href="/comment/show/?post_id=<%=i.id%>"><button>Show Comments</button></a>
+            <br><br>
+        <%}%>
+    </section>
+    <br>
+    <br>
+    <form action="/post/create" id="post-form" method="POST">
+       <textarea name="content" id="post" cols="30" rows="10" placeholder="Post something" required></textarea>
+       <button type="submit">Post</button>
+    </form>
     <a href="/user/signOut"><button type="submit">Sign Out</button></a>
 </body>
 </html>

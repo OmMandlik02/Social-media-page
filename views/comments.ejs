@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comments</title>
+</head>
+<body>
+    <p>
+        <h1>Post : <%=post_detail.content%>
+            <br>
+        <small> Posted by: <%=post_detail.user_id.name%></small></h1>
+    </p>
+
+    <%for(let i of post_detail.comments){%>
+        <p>
+            <%=i.content%>
+            <br>
+            <small>
+                Commented by:<%=i.user_id.name%>
+                <a href="/comment/delete/?id=<%=i.id%>&user_id=<%=i.user_id.id%>&post_id=<%=i.post_id%>"><button>Delete</button></a>
+            </small>
+        </p>
+        
+        
+    <%}%>
+    <a href="/user/profile"><button>Go back</button></a>
+</body>
+</html>

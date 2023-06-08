@@ -18,8 +18,8 @@ app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
 
 app.use(sassMiddelware({
-    src:'./assets/scss',
-    dest:'./assets/css',
+    src:__dirname+'/assets/scss',
+    dest:__dirname+'/assets/css',
     debug:true,
     outputStyle:'extended',
     prefix:'/css'

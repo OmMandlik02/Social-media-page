@@ -1,7 +1,11 @@
 const user=require('../models/user');
+const post=require('../models/posts');
 module.exports.profile=function(req,res){
-    return res.render('user_detail');
+    post.find({}).populate('user_id').then(data=>{
+        return res.render('user_detail',{user_post:data});
+    })
 }
+
 module.exports.signIn=function(req,res){
     if(req.isAuthenticated()){
         return res.redirect('/user/profile');
