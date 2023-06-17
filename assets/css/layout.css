@@ -1,9 +1,44 @@
 body {
-  margin: auto;
-  background-color:white; }
+  margin: auto; 
+  background: lightblue url('../home_background.jpg') no-repeat fixed center;
+  
+}
+
 #nav_bar{
   
-    background-color: #333;
-    overflow: hidden;
+  background-color: #333;
+  overflow: hidden;
+  padding: 10px;
+  overflow: auto;
+}
   
+nav a{
+  color: antiquewhite;
+  padding: 11px;
+  margin: 10px;
+}
+h1{
+  color: antiquewhite;
+  text-align: center;
+  font-size: 49px;
+}
+.butt{
+      /* display: block; */
+      margin-top: 450px;
+      /* margin-right: auto; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+}
+#bt{
+  margin: 20px;
+  width: 132px;
+  height: 47px;
+  font-size: 23px;
+  padding: 10px;
+  border-radius: 20px;
+}
+a{
+  text-decoration: none;
+    color: lightcoral;
 }

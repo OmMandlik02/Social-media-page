@@ -1,7 +1,7 @@
 const user=require('../models/user');
 const post=require('../models/posts');
 module.exports.profile=function(req,res){
-    post.find({}).populate('user_id').then(data=>{
+    post.find({}).populate('user_id').sort('-createdAt').then(data=>{
         return res.render('user_detail',{user_post:data});
     })
 }
@@ -28,13 +28,15 @@ module.exports.create=function(req,res){
             if( req.body.confirm_password==req.body.password){
                 var myData=new user(req.body);
                 myData.save();
+                req.flash('success','Signed Up Successfully')
                 return res.redirect('/user/signIn');
             }
             else{
-                console.log('Password and confirm password are not matching')
+                req.flash('error','Password and confirm password are not matching');
                 return res.redirect('/user/signUp');
             }
         }else{
+            req.flash('success','Username Already Exist!')
             return res.redirect('/user/signUp');
         }
         
@@ -42,14 +44,14 @@ module.exports.create=function(req,res){
     })
 }
 module.exports.startSession=function(req,res){
-    console.log('user finded')
+    req.flash('success','Signed in sucessfully!')
     return res.redirect('/user/profile');
 }
 module.exports.destroySession=function(req,res){
-    req.logout(function(err){
-        if(err){
-            console.log(err);
-        }
-    });
-    return res.redirect('/')
+        req.logOut(function(err){
+            req.flash('success','Signed Out sucessfully!');
+            return res.redirect('/')
+        });
+        
+        
 }

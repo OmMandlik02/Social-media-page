@@ -9,12 +9,15 @@ routes.get('/signUp',userController.signUp);
 routes.post('/create',userController.create)
 routes.get('/profile',passport.checkAuthentication,userController.profile);
 //Here we use passport middelwere for authentication
-routes.post('/start_session',passport.authenticate(
+routes.post('/start_session'
+,passport.authenticate(
+
     'local',
     {
-        failureRedirect:'/user/signIn'
+        failureRedirect:'/user/signIn',
+        
     }
-),userController.startSession)
+),userController.startSession) // Here in this route there is no request as parameter so to add flash we add req.flash in passport local strategy as it used in this request
 routes.get('/signOut',userController.destroySession)
 
 module.exports=routes;

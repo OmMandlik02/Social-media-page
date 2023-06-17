@@ -9,7 +9,8 @@ const LocalStrategy=require('./config/passport-local-strategy')
 const session=require('express-session');
 const MongoStore=require('connect-mongo')
 const sassMiddelware=require('node-sass-middleware');
-
+const flash=require('connect-flash');
+const customMidel=require('./config/middelware');
 
 app.use(express.urlencoded());
 app.use(cookieParser())
@@ -53,6 +54,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser )
+
+app.use(flash());
+app.use(customMidel.setFlash)
 
 app.use('/',require('./routes/home'));
 

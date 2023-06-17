@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -13,5 +15,28 @@
         <input type="password" name="password" placeholder="Enter the password" required>
         <button type="submit">Sign in</button>
     </form>
+
+    <!-- The below is showing error but it is not error -->
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+            new Noty({
+                theme:'sunset',
+                text:"<%=flash.success%>",
+                type:'success',
+                layout:'topRight',
+                timeout:1500
+            }).show();
+        <%}%>
+
+        <%if(flash.error && flash.error.length>0){%>
+            new Noty({
+                theme:'sunset',
+                text:"<%=flash.error%>",
+                type:'error',
+                layout:'topRight',
+                timeout:1500
+            }).show();
+        <%}%>
+    </script>
 </body>
 </html>

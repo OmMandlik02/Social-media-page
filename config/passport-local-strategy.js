@@ -4,16 +4,20 @@ const LocalStrategy=require('passport-local')
 const user=require('../models/user')
 passport.use(new LocalStrategy(
     {
-        usernameField:'Username'
-    },function(Username,password,done){
+        usernameField:'Username',
+        passReqToCallback:true
+        // Th above is used to pass request argument in function
+    },function(req,Username,password,done){
         user.findOne({'Username':Username}).then(function(data,err){
             if(err){
                 return done(err);
             }
             if(!data){
+                req.flash('error','User does not exist')
                 return done(null,false);
             }
             if(data.password!=password){
+                req.flash('error','Username/Password not matched')
                 return done(null,false);
             }
             return done(null,data);

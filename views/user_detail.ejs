@@ -5,37 +5,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 </head>
 <body>
+    
+    
     <p>Name : <%=user.name%></p>
     <p>Age : <%=user.age%></p>
     <p>Birth : <%=user.birthdate%></p>
 <br><br>
     <h1>Posts</h1>
     <section id="posts">
-        <%for(let i of user_post){%>
-            <%=i.content%>
-            <br>
-            <small>Posted by: <%=i.user_id.name%></small>
-            
-            <br>
-            <small><%=i.time%></small>
-            <small><a href="/post/delete/?id=<%=i.id%>&user_id=<%=i.user_id.id%>">Delete post</a></small>
-            <form action="/comment/create" method="post">
-                <input type="text" name="content" placeholder="Comment" required>
-                <input type="hidden" name="post_id" value="<%=i._id%>">
-                <button type="submit">Comment</button>
-            </form>
-            <a href="/comment/show/?post_id=<%=i.id%>"><button>Show Comments</button></a>
-            <br><br>
-        <%}%>
+        <%- include ('_post') -%>
     </section>
     <br>
     <br>
     <form action="/post/create" id="post-form" method="POST">
        <textarea name="content" id="post" cols="30" rows="10" placeholder="Post something" required></textarea>
-       <button type="submit">Post</button>
+       <button id="post-submit" type="submit">Post</button>
     </form>
     <a href="/user/signOut"><button type="submit">Sign Out</button></a>
+
+    <!-- The below is showing error but it is not error -->
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+            new Noty({
+                theme:'sunset',
+                text:"<%=flash.success%>",
+                type:'success',
+                layout:'topRight',
+                timeout:1500
+            }).show();
+        <%}%>
+
+        <%if(flash.error && flash.error.length>0){%>
+            new Noty({
+                theme:'sunset',
+                text:"<%=flash.error%>",
+                type:'error',
+                layout:'topRight',
+                timeout:1500
+            }).show();
+        <%}%>
+    </script>
+    <script src="/user_detail.js"></script>
 </body>
 </html>

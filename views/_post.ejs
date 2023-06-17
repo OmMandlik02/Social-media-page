@@ -1,0 +1,18 @@
+<%for(let i of user_post){%>
+    <div id="post-<%=i.id%>">
+    <%=i.content%>
+    <br>
+    <small>Posted by: <%=i.user_id.name%></small>
+    
+    <br>
+    <small><%=i.time%></small>
+    <small><a id ="#del-but" href="/post/delete/?id=<%=i.id%>&user_id=<%=i.user_id.id%>">Delete post</a></small>
+    <form action="/comment/create" method="post">
+        <input type="text" name="content" placeholder="Comment" required>
+        <input type="hidden" name="post_id" value="<%=i._id%>">
+        <button type="submit">Comment</button>
+    </form>
+    <a href="/comment/show/?post_id=<%=i.id%>"><button>Show Comments</button></a>
+    </div>
+    <br><br>
+<%}%>

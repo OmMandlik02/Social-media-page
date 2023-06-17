@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 </head>
 <body>
     <p>
@@ -22,9 +24,38 @@
                 <a href="/comment/delete/?id=<%=i.id%>&user_id=<%=i.user_id.id%>&post_id=<%=i.post_id%>"><button>Delete</button></a>
             </small>
         </p>
-        
+        <form action="/comment/create" method="post">
+            <input type="text" name="content" placeholder="Comment" required>
+            <input type="hidden" name="post_id" value="<%=i.post_id%>">
+            <button type="submit">Comment</button>
+        </form>
         
     <%}%>
+    <br><br>
     <a href="/user/profile"><button>Go back</button></a>
+
+    <!-- The below is showing error but it is not error -->
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+            new Noty({
+                theme:'sunset',
+                text:"<%=flash.success%>",
+                type:'success',
+                layout:'topRight',
+                timeout:1500
+            }).show();
+        <%}%>
+
+        <%if(flash.error && flash.error.length>0){%>
+            new Noty({
+                theme:'sunset',
+                text:"<%=flash.error%>",
+                type:'error',
+                layout:'topRight',
+                timeout:1500
+            }).show();
+        <%}%>
+    </script>
+    <!-- <script src="/comment.js"></script> -->
 </body>
 </html>
