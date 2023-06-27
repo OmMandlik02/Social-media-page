@@ -19,5 +19,7 @@ routes.post('/start_session'
     }
 ),userController.startSession) // Here in this route there is no request as parameter so to add flash we add req.flash in passport local strategy as it used in this request
 routes.get('/signOut',userController.destroySession)
+routes.post('/Profile_photo',passport.checkAuthentication,userController.profile_photo);
+routes.get('/remove_profile_photo',passport.checkAuthentication,userController.remove_profile_photo)
 
 module.exports=routes;

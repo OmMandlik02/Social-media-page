@@ -1,5 +1,10 @@
 <%for(let i of user_post){%>
     <div id="post-<%=i.id%>">
+    <%if(i.avatar){%>
+    <img src="<%=i.avatar%>" alt="image" width="500px">
+    <br>
+    <%}%>
+    
     <%=i.content%>
     <br>
     <small>Posted by: <%=i.user_id.name%></small>

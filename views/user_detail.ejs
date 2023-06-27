@@ -8,13 +8,42 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css">
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+    <link rel="stylesheet" href="/css/user_detail.css">
 </head>
 <body>
-    
-    
+    <style>
+        #removeProfile{
+            padding: 2px;
+            margin: 10px;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        img{
+            margin: 10px;
+            border-radius: 28%;
+            width: 100px;
+        }
+    </style>
+    <%if(user.avatar){%>
+    <img src="<%=user.avatar%>" alt="Profile picture" width="70px"  >
+    <%}else{%>
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Profile picture" width="70px">
+    <%}%>
+    <br>
+    Update Profile photo:
+    <br>
+    <br>
+    <form action="/user/Profile_photo" enctype="multipart/form-data" method="post">
+        <input type="file" name="avatar" >
+        <button type="submit">Update</button>
+    </form>
+    <button id="removeProfile"> <a href="/user/remove_profile_photo">Remove profile photo</a></button>
     <p>Name : <%=user.name%></p>
     <p>Age : <%=user.age%></p>
     <p>Birth : <%=user.birthdate%></p>
+    
 <br><br>
     <h1>Posts</h1>
     <section id="posts">
@@ -22,8 +51,9 @@
     </section>
     <br>
     <br>
-    <form action="/post/create" id="post-form" method="POST">
+    <form action="/post/create"  enctype="multipart/form-data" method="post">
        <textarea name="content" id="post" cols="30" rows="10" placeholder="Post something" required></textarea>
+       <input type="file" name="avatar" id="post_picture">
        <button id="post-submit" type="submit">Post</button>
     </form>
     <a href="/user/signOut"><button type="submit">Sign Out</button></a>

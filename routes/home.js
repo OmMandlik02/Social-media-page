@@ -6,5 +6,6 @@ routes.get('/',homeController.home);
 routes.use('/user',require('./user'))
 routes.use('/post',require('./post'));
 routes.use('/comment',require('./comment'))
+routes.use('/api',require('./api'));
 
 module.exports=routes;
